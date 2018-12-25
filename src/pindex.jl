@@ -105,4 +105,7 @@ s=zeros(N,T)
 return Ptc[N+1,:]
 end
 
+export FixedLaspeyres,  FixedPaasche, FixedFisher, FixedTornqvist, ChainedLaspeyres, ChainedPaasche, ChainedFisher, ChainedTornqvist
+
+
 end # module
