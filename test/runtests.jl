@@ -1,6 +1,4 @@
 using pindex
-using Test
-
 using Distributions, Parameters, LinearAlgebra, Compat, Test
 
     # T3: Identity or Constant test P(p,p,q^0,q^1)=1
