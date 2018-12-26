@@ -29,8 +29,8 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
     #T16 Paasche and Laspeyres Bounding Test: The price index P lies between the
     #Laspeyers and Paashce indices
         @testset "T16" begin
-        @test FixedFisher(a,b) < max(FixedLaspeyres(a,b),FixedPaasche(a,b))
-        @test FixedFisher(a,b) > min(FixedLaspeyres(a,b),FixedPaasche(a,b))
+        @test FixedFisher(a,b) <= max(FixedLaspeyres(a,b),FixedPaasche(a,b))
+        @test FixedFisher(a,b) >= min(FixedLaspeyres(a,b),FixedPaasche(a,b))
         #Note that Fixed Tornqvist does not satisfies T16
     end
 
