@@ -5,12 +5,10 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
     # T3: Identity or Constant test: P(p,p,q0,q1)=1
         a=[1 1 1; 2 2 2; 3 3 3]
         b=rand(3,3)
-        @testset "T3" begin
         @test FixedLaspeyres(a,b) ≈ ones(3)
         @test FixedPaasche(a,b) ≈ ones(3)
         @test FixedFisher(a,b) ≈ ones(3)
         @test FixedTornqvist(a,b) ≈ ones(3)
-        end
 
     #T5: Propotionality in Current Prices: P(p0,k*p1,q0,q1)=k*P(p0,p1,q0,q1)
         a=rand(3,3)
