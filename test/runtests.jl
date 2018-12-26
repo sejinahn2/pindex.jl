@@ -3,14 +3,21 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
 
     #Tests are referred from Professor Erwin Diewerts 580 Lecture note 3
     # T3: Identity or Constant test: P(p,p,q0,q1)=1
-        a=[1 1 1; 2 2 2; 3 3 3]
+
+        l=rand(3)
+        a=[l'; l'; l']'
         b=rand(3,3)
         @testset "T3" begin
         @test FixedLaspeyres(a,b) ≈ ones(3)
         @test FixedPaasche(a,b) ≈ ones(3)
         @test FixedFisher(a,b) ≈ ones(3)
         @test FixedTornqvist(a,b) ≈ ones(3)
-    end 
+        @test ChainedLaspeyres(a,b) ≈ ones(3)
+        @test ChainedPaasche(a,b) ≈ ones(3)
+        @test ChainedFisher(a,b) ≈ ones(3)
+        @test ChainedTornqvist(a,b) ≈ ones(3)
+
+    end
 
     #T5: Propotionality in Current Prices: P(p0,k*p1,q0,q1)=k*P(p0,p1,q0,q1)
         a=rand(3,3)
