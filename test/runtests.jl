@@ -19,3 +19,11 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
         @test FixedPaasche(a,b)[2]*k ≈ FixedPaasche(c,b)[2]
         @test FixedFisher(a,b)[2]*k ≈ FixedFisher(c,b)[2]
         #Note that Fixed Tornqvist does not satisfies T5
+
+    #T9 Commodity Reversal Test
+    #T16 Paasche and Laspeyres Bounding Test
+
+    #Circularity Test
+        a=rand(3,10)
+        b=rand(3,10)
+        @test FixedFisher(a,b)=ChainedFisher(a,b)
