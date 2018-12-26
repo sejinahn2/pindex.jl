@@ -9,7 +9,7 @@ Pl=zeros(N+1,T)
 s=zeros(N,T)
    for t in 1:T
         for n in 2:N+1
-        s[n-1,t] = (p[n-1,t]*q[n-1,t])/dot(p[:,t],q[:,t])
+        s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
         Pl[n,t]=Pl[n-1,t]+p[n-1,t]/p[n-1,1]*s[n-1,1]
         end
     end
@@ -23,7 +23,7 @@ Pp=zeros(N+1,T)
 s=zeros(N,T)
    for t in 1:T
         for n in 2:N+1
-        s[n-1,t] = p[n-1,t]*q[n-1,t]/dot(p[:,t],q[:,t])
+        s[n-1,t] = p[n-1,t]*q[n-1,t]/p[:,t]'q[:,t]
         Pp[n,t]=Pp[n-1,t]+p[n-1,1]/p[n-1,t]*s[n-1,t]
         end
     end
@@ -42,7 +42,7 @@ Pt=zeros(N+1,T)
 s=zeros(N,T)
    for t in 1:T
         for n in 2:N+1
-        s[n-1,t] = p[n-1,t]*q[n-1,t]/dot(p[:,t],q[:,t])
+        s[n-1,t] = p[n-1,t]*q[n-1,t]/p[:,t]'q[:,t]
         Pt[n,t]=(1/2)*(s[n-1,1]+s[n-1,t])*log(p[n-1,t]/p[n-1,1])
         end
     end
@@ -57,8 +57,8 @@ Plc=ones(N+1,T)
 s=zeros(N,T)
    for t in 2:T
         for n in 2:N+1
-        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/dot(p[:,t-1],q[:,t-1])
-        s[n-1,t] = (p[n-1,t]*q[n-1,t])/dot(p[:,t],q[:,t])
+        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/p[:,t-1]'q[:,t-1]
+        s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
         Pl[n,t]=Pl[n-1,t]+p[n-1,t]/p[n-1,t-1]*s[n-1,t-1]
         Plc[n,t]=Plc[n,t-1]*Pl[n,t]
         end
@@ -74,8 +74,8 @@ Ppc=ones(N+1,T)
 s=zeros(N,T)
    for t in 2:T
         for n in 2:N+1
-        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/dot(p[:,t-1],q[:,t-1])
-        s[n-1,t] = (p[n-1,t]*q[n-1,t])/dot(p[:,t],q[:,t])
+        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/p[:,t-1]'q[:,t-1]
+        s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
         Pp[n,t]=Pp[n-1,t]+p[n-1,t-1]/p[n-1,t]*s[n-1,t]
         Ppc[n,t]=Ppc[n,t-1]*(Pp[n,t])^(-1)
         end
@@ -96,8 +96,8 @@ Ptc=ones(N+1,T)
 s=zeros(N,T)
    for t in 2:T
         for n in 2:N+1
-        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/dot(p[:,t-1],q[:,t-1])
-        s[n-1,t] = (p[n-1,t]*q[n-1,t])/dot(p[:,t],q[:,t])
+        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/p[:,t-1]'q[:,t-1]
+        s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
         Pt[n,t]=(1/2)*(s[n-1,t-1]+s[n-1,t])*log(p[n-1,t]/p[n-1,t-1])
         Ptc[n,t]=Ptc[n,t-1]*exp(Pt[n,t])
         end
