@@ -54,13 +54,12 @@ end
 function ChainedLaspeyres(p,q)
 N=size(p,1)
 T=size(p,2)
-Pl=ones(N+1,T)
+Pl=zeros(N+1,T)
 Plc=ones(N+1,T)
 s=zeros(N,T)
    for t in 2:T
         for n in 2:N+1
         s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/p[:,t-1]'q[:,t-1]
-        s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
         Pl[n,t]=Pl[n-1,t]+p[n-1,t]/p[n-1,t-1]*s[n-1,t-1]
         Plc[n,t]=Plc[n,t-1]*Pl[n,t]
         end
@@ -71,12 +70,11 @@ end
 function ChainedPaasche(p,q)
 N=size(p,1)
 T=size(p,2)
-Pp=ones(N+1,T)
+Pp=zeros(N+1,T)
 Ppc=ones(N+1,T)
 s=zeros(N,T)
    for t in 2:T
         for n in 2:N+1
-        s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/p[:,t-1]'q[:,t-1]
         s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
         Pp[n,t]=Pp[n-1,t]+p[n-1,t-1]/p[n-1,t]*s[n-1,t]
         Ppc[n,t]=Ppc[n,t-1]*(Pp[n,t])^(-1)
@@ -93,14 +91,14 @@ end
 function ChainedTornqvist(p,q)
 N=size(p,1)
 T=size(p,2)
-Pt=ones(N+1,T)
+Pt=zeros(N+1,T)
 Ptc=ones(N+1,T)
 s=zeros(N,T)
    for t in 2:T
         for n in 2:N+1
         s[n-1,t-1] = p[n-1,t-1]*q[n-1,t-1]/p[:,t-1]'q[:,t-1]
         s[n-1,t] = (p[n-1,t]*q[n-1,t])/p[:,t]'q[:,t]
-        Pt[n,t]=(1/2)*(s[n-1,t-1]+s[n-1,t])*log(p[n-1,t]/p[n-1,t-1])
+        Pt[n,t]=Pt[n-1,t]+(1/2)*(s[n-1,t-1]+s[n-1,t])*log(p[n-1,t]/p[n-1,t-1])
         Ptc[n,t]=Ptc[n,t-1]*exp(Pt[n,t])
         end
     end
