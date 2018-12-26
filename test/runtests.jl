@@ -40,6 +40,6 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
         @test FixedPaasche(a,b) == FixPaasche(a,b)
         @test FixedFisher(a,b) == FixFisher(a,b)
         @test ChainedLaspeyres(a,b) == ChainLaspeyres(a,b)
-        @test ChainedPaasche(a,b) == ChainPaasche(a,b)
-        @test ChainedFisher(a,b) == ChainedFisher(a,b)
+        @test ChainedPaasche(a,b) ≈ ChainPaasche(a,b)
+        @test ChainedFisher(a,b) ≈ ChainedFisher(a,b)
     end
