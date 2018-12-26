@@ -24,6 +24,6 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
     #T16 Paasche and Laspeyres Bounding Test
 
     #Circularity Test
-        a=rand(3,10)
-        b=rand(3,10)
-        @test FixedFisher(a,b)=ChainedFisher(a,b)
+        #a=rand(3,10)
+        #b=rand(3,10)
+        #@test FixedFisher(a,b)=ChainedFisher(a,b)
