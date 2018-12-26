@@ -26,7 +26,6 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
         #Note that Fixed Tornqvist does not satisfies T5
     end
 
-    #T9 Commodity Reversal Test
     #T16 Paasche and Laspeyres Bounding Test: The price index P lies between the
     #Laspeyers and Paashce indices
         @testset "T16" begin
@@ -35,4 +34,12 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
         #Note that Fixed Tornqvist does not satisfies T16
     end
 
-    
+    #TEST using Different Methods
+        @testset "Method" begin
+        @test FixedLaspeyres(a,b) == FixLaspeyres(a,b)
+        @test FixedPaasche(a,b) == FixPaasche(a,b)
+        @test FixedFisher(a,b) == FixFisher(a,b)
+        @test ChainedLaspeyres(a,b) == ChainLaspeyres(a,b)
+        @test ChainedPaasche(a,b) == ChainPaasche(a,b)
+        @test ChainedFisher(a,b) == ChainedFisher(a,b)
+    end
