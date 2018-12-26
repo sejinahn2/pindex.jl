@@ -107,6 +107,60 @@ s=zeros(N,T)
 return Ptc[N+1,:]
 end
 
-export FixedLaspeyres,  FixedPaasche, FixedFisher, FixedTornqvist, ChainedLaspeyres, ChainedPaasche, ChainedFisher, ChainedTornqvist
+function FixLaspeyres(p,q)
+N=size(p,1)
+T=size(p,2)
+Pl=zeros(T)
+    for t in 1:T
+    Pl[t]=p[:,t]'q[:,1]/p[:,1]'q[:,1]
+    end
+return Pl
+end
+
+function FixPaasche(p,q)
+N=size(p,1)
+T=size(p,2)
+Pl=zeros(T)
+    for t in 1:T
+    Pl[t]=p[:,t]'q[:,t]/p[:,1]'q[:,t]
+    end
+return Pl
+end
+
+function FixFisher(p,q)
+     Pf=(FixPaasche(p,q).^(1/2)).*(FixLaspeyres(p,q).^(1/2))
+return Pf
+end
+
+function ChainLaspeyres(p,q)
+N=size(p,1)
+T=size(p,2)
+Pl=ones(T)
+Plc=ones(T)
+    for t in 2:T
+    Pl[t]=p[:,t]'q[:,t-1]/p[:,t-1]'q[:,t-1]
+    Plc[t]=Plc[t-1]*Pl[t]
+    end
+return Plc
+end
+
+function ChainPaasche(p,q)
+N=size(p,1)
+T=size(p,2)
+Pp=ones(T)
+Ppc=ones(T)
+    for t in 2:T
+    Pp[t]=p[:,t]'q[:,t]/p[:,t-1]'q[:,t]
+    Ppc[t]=Ppc[t-1]*Pp[t]
+    end
+return Ppc
+end
+
+function ChainFisher(p,q)
+    Pfc=(ChainPaasche(p,q).^(1/2)).*(ChainLaspeyres(p,q).^(1/2))
+return Pfc
+end
+
+export FixedLaspeyres,  FixedPaasche, FixedFisher, FixedTornqvist, ChainedLaspeyres, ChainedPaasche, ChainedFisher, ChainedTornqvist, FixLaspeyres, FixPaasche, FixFisher, ChainLaspeyres, ChainPaasche, ChainFisher
 
 end # module
