@@ -2,7 +2,7 @@ using pindex
 using Distributions, Parameters, LinearAlgebra, Compat, Test
 
     #Tests are referred from Professor Erwin Diewerts 580 Lecture note 3
-    # T3: Identity or Constant test: P(p,p,q0,q1)=1
+    #T3: Identity or Constant test: P(p,p,q0,q1)=1
 
         l=rand(3)
         a=[l'; l'; l']'
@@ -24,14 +24,6 @@ using Distributions, Parameters, LinearAlgebra, Compat, Test
         @test FixedPaasche(a,b)[2]*k ≈ FixedPaasche(c,b)[2]
         @test FixedFisher(a,b)[2]*k ≈ FixedFisher(c,b)[2]
         #Note that Fixed Tornqvist does not satisfies T5
-    end
-
-    #T16 Paasche and Laspeyres Bounding Test: The price index P lies between the
-    #Laspeyers and Paashce indices
-        @testset "T16" begin
-        @test FixedFisher(a,b) <= max(FixedLaspeyres(a,b),FixedPaasche(a,b))
-        @test FixedFisher(a,b) >= min(FixedLaspeyres(a,b),FixedPaasche(a,b))
-        #Note that Fixed Tornqvist does not satisfies T16
     end
 
     #TEST using Different Methods
