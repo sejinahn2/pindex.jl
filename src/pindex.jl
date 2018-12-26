@@ -2,6 +2,8 @@ module pindex
 
 greet() = print("Hello World!")
 
+using Distributions, Parameters, LinearAlgebra, Compat, Test
+
 function FixedLaspeyres(p,q)
 N=size(p,1)
 T=size(p,2)
@@ -106,6 +108,5 @@ return Ptc[N+1,:]
 end
 
 export FixedLaspeyres,  FixedPaasche, FixedFisher, FixedTornqvist, ChainedLaspeyres, ChainedPaasche, ChainedFisher, ChainedTornqvist
-
 
 end # module
